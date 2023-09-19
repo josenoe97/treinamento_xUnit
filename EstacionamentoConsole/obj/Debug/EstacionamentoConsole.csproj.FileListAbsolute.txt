@@ -1,0 +1,8 @@
+C:\Users\edson\OneDrive\Área de Trabalho\Alura\Formação de Teste(Alura)\EstacionamentoConsole\EstacionamentoConsole\bin\Debug\EstacionamentoConsole.exe.config
+C:\Users\edson\OneDrive\Área de Trabalho\Alura\Formação de Teste(Alura)\EstacionamentoConsole\EstacionamentoConsole\bin\Debug\EstacionamentoConsole.exe
+C:\Users\edson\OneDrive\Área de Trabalho\Alura\Formação de Teste(Alura)\EstacionamentoConsole\EstacionamentoConsole\bin\Debug\EstacionamentoConsole.pdb
+C:\Users\edson\OneDrive\Área de Trabalho\Alura\Formação de Teste(Alura)\EstacionamentoConsole\EstacionamentoConsole\obj\Debug\EstacionamentoConsole.csproj.AssemblyReference.cache
+C:\Users\edson\OneDrive\Área de Trabalho\Alura\Formação de Teste(Alura)\EstacionamentoConsole\EstacionamentoConsole\obj\Debug\EstacionamentoConsole.csproj.SuggestedBindingRedirects.cache
+C:\Users\edson\OneDrive\Área de Trabalho\Alura\Formação de Teste(Alura)\EstacionamentoConsole\EstacionamentoConsole\obj\Debug\EstacionamentoConsole.csproj.CoreCompileInputs.cache
+C:\Users\edson\OneDrive\Área de Trabalho\Alura\Formação de Teste(Alura)\EstacionamentoConsole\EstacionamentoConsole\obj\Debug\EstacionamentoConsole.exe
+C:\Users\edson\OneDrive\Área de Trabalho\Alura\Formação de Teste(Alura)\EstacionamentoConsole\EstacionamentoConsole\obj\Debug\EstacionamentoConsole.pdb
