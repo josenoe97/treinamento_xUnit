@@ -10,6 +10,7 @@ namespace Estacionamento.Testes
         //Padrão A.A.A
         
         [Fact]
+        [Trait("Funcionalidade", "Acelerar")]
         public void TestaVeiculoAcelerar()
         {
             //Arrange
@@ -22,7 +23,8 @@ namespace Estacionamento.Testes
 
         }
 
-        [Fact]
+        [Fact(DisplayName = "Teste n°1")]
+        [Trait("Funcionalidade", "Frear")]
         public void TestaVeiculoFrear()
         {
             //Arrange
@@ -33,7 +35,7 @@ namespace Estacionamento.Testes
             Assert.Equal(-150, veiculo.VelocidadeAtual);
         }
 
-        [Fact]
+        [Fact(DisplayName ="Teste n°2")]
         public void TestaTipoVeiculo()
         {
             //Arrange
@@ -41,6 +43,12 @@ namespace Estacionamento.Testes
             //Act
             //Assert
             Assert.Equal(TipoVeiculo.Automovel, veiculo.Tipo);
+        }
+
+        [Fact(DisplayName="Teste n°3", Skip ="Teste ainda não implementado. Ignorar")]
+        public void ValidaNomeProprietario()
+        {
+
         }
     }
 }
