@@ -50,5 +50,26 @@ namespace Estacionamento.Testes
         {
 
         }
+
+        [Fact]
+        public void DadosVeiculo()
+        {
+            //Arrange
+            var carro = new Veiculo()
+            {
+                Proprietario = "Carlos Silva",
+                Tipo = TipoVeiculo.Automovel,
+                Placa = "ZAP-7446",
+                Cor = "Verde",
+                Modelo = "Variante"
+            };
+
+            //Act
+            string dados = carro.ToString();
+
+            //Assert
+            Assert.Contains("Ficha do Veículo:", dados); 
+            // Contains permite veirificar se há um determinado valor
+        }
     }
 }
