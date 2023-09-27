@@ -1,20 +1,28 @@
 using EstacionamentoConsole;
 using EstacionamentoConsole.Models;
 using NuGet.Frameworks;
+using Xunit.Abstractions;
 
 namespace Estacionamento.Testes
 {
-    public class VeiculoTestes
+    public class VeiculoTestes : IDisposable
     {
-        
+        private Veiculo veiculo;
+        public ITestOutputHelper SaidaConsoleTeste;
         //Padrão A.A.A
-        
+        public VeiculoTestes(ITestOutputHelper _saidaConsoleTeste)
+        {
+            SaidaConsoleTeste = _saidaConsoleTeste;
+            SaidaConsoleTeste.WriteLine("Construtor invocado.");
+            veiculo = new Veiculo();
+        }
+
         [Fact]
-        [Trait("Funcionalidade", "Acelerar")]
-        public void TestaVeiculoAcelerar()
+
+        public void TestaVeiculoAcelerarComParametro10()
         {
             //Arrange
-            var veiculo = new Veiculo();
+            //var veiculo = new Veiculo();
             //Act
             veiculo.Acelerar(10);
             //Assert 
@@ -23,12 +31,11 @@ namespace Estacionamento.Testes
 
         }
 
-        [Fact(DisplayName = "Teste n°1")]
-        [Trait("Funcionalidade", "Frear")]
-        public void TestaVeiculoFrear()
+        [Fact]
+        public void TestaVeiculoFrearcComParametro10()
         {
             //Arrange
-            var veiculo = new Veiculo();
+            //var veiculo = new Veiculo();
             //Act
             veiculo.Frear(10);
             //Assert 
@@ -45,14 +52,14 @@ namespace Estacionamento.Testes
             Assert.Equal(TipoVeiculo.Automovel, veiculo.Tipo);
         }
 
-        [Fact(DisplayName="Teste n°3", Skip ="Teste ainda não implementado. Ignorar")]
-        public void ValidaNomeProprietario()
+        [Fact(Skip ="Ignore")]
+        public void ValidaNomeProprietarioDoVeiculo()
         {
 
         }
 
         [Fact]
-        public void DadosVeiculo()
+        public void FichaDeInformacaoDoVeiculo()
         {
             //Arrange
             var carro = new Veiculo()
@@ -70,6 +77,11 @@ namespace Estacionamento.Testes
             //Assert
             Assert.Contains("Ficha do Veículo:", dados); 
             // Contains permite veirificar se há um determinado valor
+        }
+
+        public void Dispose()
+        {
+            SaidaConsoleTeste.WriteLine("Dispose invocado.");
         }
     }
 }

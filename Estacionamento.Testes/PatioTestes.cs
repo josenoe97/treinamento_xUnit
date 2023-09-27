@@ -1,21 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EstacionamentoConsole;
 using EstacionamentoConsole.Models;
+using Xunit.Abstractions;
 
 namespace Estacionamento.Testes
 {
-    public class PatioTestes
+    public class PatioTestes : IDisposable
     {
+
+        private Veiculo veiculo;
+        public ITestOutputHelper SaidaConsoleTeste;
+
+        public PatioTestes(ITestOutputHelper _saidaConsoleTeste)
+        {
+            SaidaConsoleTeste = _saidaConsoleTeste;
+            SaidaConsoleTeste.WriteLine("Construtor invocado.");
+            veiculo = new Veiculo();
+        }
+
+
+
         [Fact]
-        public void ValidaFaturamento()
+        public void ValidaFaturamentoEstacionamentoComUmVeiculo()
         {
             //Arrange
             var estacionamento = new Patio();
-            var veiculo = new Veiculo();
+            //var veiculo = new Veiculo();
             veiculo.Proprietario = "José Edson Noé";
             veiculo.Tipo = TipoVeiculo.Automovel;
             veiculo.Cor = "Verde";
@@ -46,7 +62,7 @@ namespace Estacionamento.Testes
         {
             //Arrange
             Patio estacionamento = new Patio();
-            var veiculo = new Veiculo();
+            //var veiculo = new Veiculo();
             veiculo.Proprietario = proprietario;
             veiculo.Tipo = tipo;
             veiculo.Placa = placa;
@@ -63,7 +79,7 @@ namespace Estacionamento.Testes
         }
         [Theory]
         [InlineData("André Silva", TipoVeiculo.Automovel, "ASD-1498", "preto", "Gol")]
-        public void LocalizaVeiculoNoPatio(string proprietario,
+        public void LocalizaVeiculoNoPatioComBaseNaPlaca(string proprietario,
                                             TipoVeiculo tipo,
                                             string placa,
                                             string cor,
@@ -71,7 +87,7 @@ namespace Estacionamento.Testes
         {
             //Arrange
             Patio estacionamento = new Patio();
-            var veiculo = new Veiculo();
+            //var veiculo = new Veiculo();
             veiculo.Proprietario = proprietario;
             veiculo.Tipo = tipo;
             veiculo.Placa = placa;
@@ -86,17 +102,17 @@ namespace Estacionamento.Testes
         }
 
         [Fact]
-        public void AlterarDadosVeiculo()
+        public void AlterarDadosVeiculoDoProprioVeiculo()
         {
             //Arrange
             Patio estanacionamento = new Patio();
-            var veiculo = new Veiculo()
-            {
-                Proprietario = "José Silva",
-                Placa = "XZC-8524",
-                Cor = "Verde",
-                Modelo = "Opala",
-            };
+            //var veiculo = new Veiculo();
+
+            veiculo.Proprietario = "José Silva";
+            veiculo.Placa = "XZC-8524";
+            veiculo.Cor = "Verde";
+            veiculo.Modelo = "Opala";
+
 
             estanacionamento.RegistrarEntradaVeiculo(veiculo);
 
@@ -115,5 +131,9 @@ namespace Estacionamento.Testes
             Assert.Equal(alterado.Cor, veiculoAlterado.Cor);
         }
 
+        public void Dispose()
+        {
+            SaidaConsoleTeste.WriteLine("Dispose invocado.");
+        }
     }
 }
