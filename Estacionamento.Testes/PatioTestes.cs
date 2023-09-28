@@ -15,6 +15,7 @@ namespace Estacionamento.Testes
     {
 
         private Veiculo veiculo;
+        private Operador operador;
         public ITestOutputHelper SaidaConsoleTeste;
 
         public PatioTestes(ITestOutputHelper _saidaConsoleTeste)
@@ -22,6 +23,8 @@ namespace Estacionamento.Testes
             SaidaConsoleTeste = _saidaConsoleTeste;
             SaidaConsoleTeste.WriteLine("Construtor invocado.");
             veiculo = new Veiculo();
+            operador = new Operador();
+            operador.Nome = "Pedro Silva";
         }
 
 
@@ -30,7 +33,12 @@ namespace Estacionamento.Testes
         public void ValidaFaturamentoEstacionamentoComUmVeiculo()
         {
             //Arrange
+            
+
             var estacionamento = new Patio();
+
+            
+            estacionamento.OperadorPatio = operador;
             //var veiculo = new Veiculo();
             veiculo.Proprietario = "José Edson Noé";
             veiculo.Tipo = TipoVeiculo.Automovel;
@@ -63,6 +71,9 @@ namespace Estacionamento.Testes
             //Arrange
             Patio estacionamento = new Patio();
             //var veiculo = new Veiculo();
+
+            estacionamento.OperadorPatio = operador;
+
             veiculo.Proprietario = proprietario;
             veiculo.Tipo = tipo;
             veiculo.Placa = placa;
@@ -79,7 +90,7 @@ namespace Estacionamento.Testes
         }
         [Theory]
         [InlineData("André Silva", TipoVeiculo.Automovel, "ASD-1498", "preto", "Gol")]
-        public void LocalizaVeiculoNoPatioComBaseNaPlaca(string proprietario,
+        public void LocalizaVeiculoNoPatioComBaseIdTicket(string proprietario,
                                             TipoVeiculo tipo,
                                             string placa,
                                             string cor,
@@ -87,6 +98,9 @@ namespace Estacionamento.Testes
         {
             //Arrange
             Patio estacionamento = new Patio();
+
+            estacionamento.OperadorPatio = operador;
+
             //var veiculo = new Veiculo();
             veiculo.Proprietario = proprietario;
             veiculo.Tipo = tipo;
@@ -95,18 +109,19 @@ namespace Estacionamento.Testes
             veiculo.Modelo = modelo;
             estacionamento.RegistrarEntradaVeiculo(veiculo);
             //Act
-            var consultado = estacionamento.PesquisaVeiculo(placa);
+            var consultado = estacionamento.PesquisaVeiculo(veiculo.IdTicket);
 
             //Assert
-            Assert.Equal(placa, consultado.Placa);
+            Assert.Contains("### Ticket Estacionamento Alura ###", consultado.Ticket);
         }
 
         [Fact]
-        public void AlterarDadosVeiculoDoProprioVeiculo()
+        public void AlterarDadosDoProprioVeiculo()
         {
             //Arrange
-            Patio estanacionamento = new Patio();
+            Patio estacionamento = new Patio();
             //var veiculo = new Veiculo();
+            estacionamento.OperadorPatio = operador;
 
             veiculo.Proprietario = "José Silva";
             veiculo.Placa = "XZC-8524";
@@ -114,7 +129,7 @@ namespace Estacionamento.Testes
             veiculo.Modelo = "Opala";
 
 
-            estanacionamento.RegistrarEntradaVeiculo(veiculo);
+            estacionamento.RegistrarEntradaVeiculo(veiculo);
 
             var veiculoAlterado = new Veiculo();
 
@@ -125,7 +140,7 @@ namespace Estacionamento.Testes
 
 
             //Act
-            Veiculo alterado = estanacionamento.AlterarDadosVeiculo(veiculoAlterado);
+            Veiculo alterado = estacionamento.AlterarDadosVeiculo(veiculoAlterado);
 
             //Assert
             Assert.Equal(alterado.Cor, veiculoAlterado.Cor);

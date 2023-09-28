@@ -1,4 +1,5 @@
-﻿using EstacionamentoConsole;
+﻿using EstacionamentoConsole.Models;
+using EstacionamentoConsole;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,13 +8,17 @@ namespace EstacionamentoConsole.Models
 {
     public class Veiculo
     {
-        //Campos    
+        //Campos      
         private string _placa;
         private string _proprietario;
         private TipoVeiculo _tipo;
+        private string _ticket;
 
-        //Propriedades   
+        public string IdTicket { get; set; }
 
+        public string Ticket { get => _ticket; set => _ticket = value; }  
+
+        //Propriedades
         public string Placa
         {
             get
@@ -67,7 +72,19 @@ namespace EstacionamentoConsole.Models
         public string Modelo { get; set; }
         public string Proprietario
         {
-            get; set;
+            get
+            {
+                return _proprietario;
+            }
+            set
+            {
+                if (value.Length < 3)
+                {
+                    throw new System.FormatException(" Nome de proprietário deve ter no mínimo 3 caracteres.");
+                }
+                _proprietario = value;
+            }
+
         }
         public DateTime HoraEntrada { get; set; }
         public DateTime HoraSaida { get; set; }
@@ -95,11 +112,12 @@ namespace EstacionamentoConsole.Models
         public override string ToString()
         {
             return $"Ficha do Veículo:\n " +
-                   $"Tipo do Veículo: {this.Tipo.ToString()}\n " +
-                   $"Proprietário: {this.Proprietario}\n" +
-                   $"Modelo: {this.Modelo}\n" +
-                   $"Cor: {this.Cor}\n" +
-                   $"Placa: {this.Placa}\n";
+                    $"Tipo do Veículo: {this.Tipo.ToString()}\n " +
+                    $"Proprietário: {this.Proprietario}\n" +
+                    $"Modelo: {this.Modelo}\n" +
+                    $"Cor: {this.Cor}\n" +
+                    $"Placa: {this.Placa}\n";
+
         }
 
         //Construtor
@@ -112,6 +130,7 @@ namespace EstacionamentoConsole.Models
         {
             Proprietario = proprietario;
         }
+
 
 
     }

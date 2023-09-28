@@ -42,7 +42,7 @@ namespace Estacionamento.Testes
             Assert.Equal(-150, veiculo.VelocidadeAtual);
         }
 
-        [Fact(DisplayName ="Teste n°2")]
+        [Fact(DisplayName = "Teste n°2")]
         public void TestaTipoVeiculo()
         {
             //Arrange
@@ -52,7 +52,7 @@ namespace Estacionamento.Testes
             Assert.Equal(TipoVeiculo.Automovel, veiculo.Tipo);
         }
 
-        [Fact(Skip ="Ignore")]
+        [Fact(Skip = "Ignore")]
         public void ValidaNomeProprietarioDoVeiculo()
         {
 
@@ -75,13 +75,47 @@ namespace Estacionamento.Testes
             string dados = carro.ToString();
 
             //Assert
-            Assert.Contains("Ficha do Veículo:", dados); 
+            Assert.Contains("Ficha do Veículo:", dados);
             // Contains permite veirificar se há um determinado valor
+        }
+
+        [Fact]
+        public void TestaNomeProprietarioVeiculoComMenosDeTresCaracteres()
+        {
+            //Arrange
+            string nomeProprietario = "As";
+
+            //Assert
+            var mensagem = Assert.Throws<System.FormatException>(
+                //Act
+                () => new Veiculo().Proprietario = nomeProprietario
+            ) ;
+
+            Assert.Equal(" Nome de proprietário deve ter no mínimo 3 caracteres.", mensagem.Message);
+
+        }
+
+        [Fact]
+        public void TestaMensagemDeExcecaoDoQuartoCaractereDaPlaca()
+        {
+            //Arrange
+            string placaVeiculo = "BCBF4789";
+
+            //Act
+            var mensagem = Assert.Throws<System.FormatException>(
+                () => new Veiculo().Placa = placaVeiculo
+            );
+
+            //Assert
+            Assert.Equal("O 4° caractere deve ser um hífen", mensagem.Message);
+
         }
 
         public void Dispose()
         {
             SaidaConsoleTeste.WriteLine("Dispose invocado.");
         }
+
+
     }
 }
